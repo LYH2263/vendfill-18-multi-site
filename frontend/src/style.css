@@ -175,3 +175,71 @@ th { color: var(--vf-dim); font-weight: 600; font-size: 0.75rem; }
 
 .lane { display: flex; height: 28px; background: #0a0c10; border-radius: 4px; overflow: hidden; border: 1px solid #3a4656; margin: 0.35rem 0; }
 .lane-fill { height: 100%; }
+
+/* 当前点位选择器 */
+.vf-loc-select {
+  width: 100%;
+  background: var(--vf-face);
+  color: var(--vf-led);
+  border: 1px solid var(--vf-led);
+  border-radius: 4px;
+  padding: 0.45rem 0.4rem;
+  font: inherit;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+.vf-loc-select:disabled { opacity: 0.55; }
+
+/* 表单/输入 */
+.vf-form {
+  display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: flex-end;
+  background: #1a222c; border: 1px solid #3a4656; border-radius: 6px;
+  padding: 0.75rem 0.85rem; margin-bottom: 0.9rem;
+}
+.vf-form label { display: flex; flex-direction: column; gap: 0.2rem; font-size: 0.68rem; color: var(--vf-dim); }
+.vf-form input {
+  background: #0e141c; color: var(--vf-text); border: 1px solid #3a4656;
+  border-radius: 3px; padding: 0.35rem 0.45rem; font: inherit; font-size: 0.78rem;
+  min-width: 90px;
+}
+.vf-form input:focus { outline: none; border-color: var(--vf-led); }
+
+.vf-error {
+  background: rgba(255,92,108,0.12); border: 1px solid var(--vf-red);
+  color: var(--vf-red); border-radius: 4px; padding: 0.5rem 0.7rem;
+  font-size: 0.78rem; margin-bottom: 0.75rem;
+}
+.vf-empty {
+  border: 1px dashed #3a4656; border-radius: 6px; padding: 1.25rem;
+  color: var(--vf-dim); font-size: 0.82rem; text-align: center;
+}
+.vf-loading { color: var(--vf-dim); font-size: 0.8rem; }
+
+.vf-loc-card {
+  cursor: pointer; text-align: left; min-width: 180px;
+  font-family: "Segoe UI", "PingFang SC", sans-serif;
+}
+.vf-loc-card.vf-current {
+  border-color: var(--vf-led); box-shadow: 0 0 0 1px var(--vf-led), inset 0 0 12px rgba(57,255,136,0.12);
+}
+.vf-loc-card .vf-loc-meta { font-size: 0.66rem; color: var(--vf-dim); display: block; margin-top: 0.15rem; }
+.vf-card-actions { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
+.vf-btn-danger {
+  background: transparent; color: var(--vf-red); border: 1px solid var(--vf-red);
+  border-radius: 3px; padding: 0.25rem 0.55rem; cursor: pointer;
+  font-weight: 700; font-size: 0.68rem;
+}
+.vf-btn-danger:hover { background: rgba(255,92,108,0.15); }
+.vf-btn-void {
+  background: transparent; color: var(--vf-amber); border: 1px solid var(--vf-amber);
+  border-radius: 3px; padding: 0.2rem 0.5rem; cursor: pointer;
+  font-weight: 700; font-size: 0.68rem;
+}
+.vf-order-void { opacity: 0.55; }
+.vf-slot-del {
+  position: absolute; top: 2px; right: 3px;
+  background: transparent; border: none; color: var(--vf-red);
+  cursor: pointer; font-size: 0.7rem; line-height: 1; padding: 0;
+}
+.vf-slot-del:hover { color: #fff; }
+.vf-inline-ok { color: var(--vf-led); font-size: 0.75rem; }

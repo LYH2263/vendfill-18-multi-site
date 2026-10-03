@@ -23,5 +23,5 @@ def seed_if_empty(db: Session) -> None:
         lane_ids.append(lane.id)
     now = datetime(2026, 9, 16, 12, 0, 0)
     for i, lid in enumerate(lane_ids):
-        db.add(Sale(lane_id=lid, qty=2 + i, sold_at=now - timedelta(hours=i)))
+        db.add(Sale(location_id=loc.id, lane_id=lid, qty=2 + i, sold_at=now - timedelta(hours=i)))
     db.commit()

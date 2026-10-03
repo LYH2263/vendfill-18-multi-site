@@ -33,3 +33,11 @@ class RefillOrder(Base):
     location_id: Mapped[int] = mapped_column(ForeignKey("locations.id"))
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     lines_json: Mapped[str] = mapped_column(Text, default="[]")
+    # active | void —— 作废单不再计入有效单，点位存在未作废单时禁止删除
+    status: Mapped[str] = mapped_column(String(16), default="active")
+
+class AppState(Base):
+    """Singleton key/value state; holds current_location_id (当前点位)."""
+    __tablename__ = "app_state"
+    key: Mapped[str] = mapped_column(String(64), primary_key=True)
+    value: Mapped[str] = mapped_column(String(64), default="")

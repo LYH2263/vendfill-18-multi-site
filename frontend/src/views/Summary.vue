@@ -1,12 +1,23 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { api } from '../api'
+import { current, dataVersion } from '../store'
+
 const s = ref<any>({})
-onMounted(async () => { s.value = await api('/refills/summary?location_id=1') })
+const error = ref('')
+
+async function load() {
+  error.value = ''
+  try { s.value = await api('/refills/summary') } catch (e: any) { error.value = e.message || String(e) }
+}
+
+onMounted(load)
+watch(dataVersion, load)
 </script>
 <template>
   <h1>汇总</h1>
-  <p class="sub">本点位补货建议合计</p>
+  <p class="sub">当前点位：{{ current?.code }} · 本点位补货建议合计</p>
+  <div v-if="error" class="vf-error">{{ error }}</div>
   <div class="card grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem">
     <div><div class="muted">建议补货总量</div><div class="stat">{{ s.total_fill }}</div></div>
     <div><div class="muted">待补货道</div><div class="stat">{{ s.need_fill_count }}</div></div>

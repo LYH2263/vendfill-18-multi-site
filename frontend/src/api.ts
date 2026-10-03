@@ -3,7 +3,15 @@ export async function api<T = any>(path: string, init?: RequestInit): Promise<T>
     headers: { 'Content-Type': 'application/json', ...(init?.headers || {}) },
     ...init,
   })
-  if (!res.ok) throw new Error(await res.text() || res.statusText)
+  if (!res.ok) {
+    const text = await res.text()
+    let msg = text || res.statusText
+    try {
+      const body = JSON.parse(text)
+      if (body?.detail) msg = typeof body.detail === 'string' ? body.detail : JSON.stringify(body.detail)
+    } catch { /* 保留原始文本 */ }
+    throw new Error(msg)
+  }
   if (res.status === 204) return undefined as T
   return res.json()
 }

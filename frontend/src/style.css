@@ -70,6 +70,42 @@ a { color: inherit; text-decoration: none; }
 }
 .vf-site-btn:hover { color: var(--vf-text); border-color: var(--vf-led); }
 
+/* Location switcher buttons in the rail */
+.vf-loc-btn { cursor: pointer; font: inherit; width: 100%; }
+.vf-loc-btn.vf-loc-active {
+  color: #210f00; background: var(--vf-amber);
+  border-color: var(--vf-amber); font-weight: 800;
+}
+.vf-loc-btn.vf-loc-active:hover { color: #210f00; }
+
+/* Inline banners & forms */
+.vf-error {
+  background: rgba(255,92,108,0.12); color: var(--vf-red);
+  border: 1px solid rgba(255,92,108,0.4); border-radius: 4px;
+  padding: 0.45rem 0.7rem; font-size: 0.78rem; margin-bottom: 0.75rem;
+}
+.vf-notice {
+  background: rgba(57,255,136,0.1); color: var(--vf-led);
+  border: 1px solid rgba(57,255,136,0.35); border-radius: 4px;
+  padding: 0.45rem 0.7rem; font-size: 0.78rem; margin-bottom: 0.75rem;
+}
+.vf-form { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+.vf-form input {
+  background: #0a0e14; border: 1px solid #3a4656; color: var(--vf-text);
+  border-radius: 3px; padding: 0.4rem 0.55rem; font: inherit; font-size: 0.78rem;
+}
+.vf-form input:focus { outline: none; border-color: var(--vf-led); }
+.btn-danger { background: var(--vf-red); color: #21060a; }
+.btn-ghost { background: transparent; border: 1px solid #3a4656; color: var(--vf-dim); }
+.btn-ghost:hover { color: var(--vf-text); border-color: var(--vf-led); filter: none; }
+.btn-sm { padding: 0.2rem 0.5rem; font-size: 0.7rem; }
+.vf-slot-del {
+  position: absolute; top: 2px; right: 4px;
+  background: none; border: none; color: var(--vf-dim);
+  cursor: pointer; font-size: 0.75rem; padding: 0 2px; line-height: 1;
+}
+.vf-slot-del:hover { color: var(--vf-red); }
+
 .vf-glass {
   background: var(--vf-glass);
   padding: 1rem 1.15rem 1.5rem;

@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import inspect, text
 
 from app.api.router import api_router
 from app.config import settings
@@ -9,9 +10,20 @@ from app.database import Base, SessionLocal, engine
 from app.services.seed import seed_if_empty
 
 
+def ensure_schema() -> None:
+    """create_all 只建新表；这里为已存在的库补齐新增列（如 refill_orders.status）。"""
+    Base.metadata.create_all(bind=engine)
+    with engine.begin() as conn:
+        cols = {c["name"] for c in inspect(conn).get_columns("refill_orders")}
+        if "status" not in cols:
+            conn.execute(text(
+                "ALTER TABLE refill_orders ADD COLUMN status VARCHAR(16) NOT NULL DEFAULT 'active'"
+            ))
+
+
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
-    Base.metadata.create_all(bind=engine)
+    ensure_schema()
     if settings.seed_on_empty:
         db = SessionLocal()
         try:
